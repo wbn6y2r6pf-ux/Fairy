@@ -1,3 +1,2 @@
 96eb8341c17578fb3681dad33744c821a2956fcd0532ada5e9eacf5bfe5aa3dd  Fairy-Installer-v1.0.zip
 f83e9bb0d53643cb4adedff6b509c4d412558891b41ce491c6cfc8f72c9ec10a  Fairy-Data-v1.0.zip
-1b852ab96f35be144d0cca0bf4a6d1cd7589c8ed63df11688db087e2d70bf6df  Fairy-安装版.exe
