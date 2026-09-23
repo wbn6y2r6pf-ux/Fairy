@@ -22,4 +22,13 @@ Fairy 桌宠的 Windows 一键安装整合包：包含安装脚本（`INSTALL.ba
 
 ## 安装
 
-运行 `安装 Fairy.bat`（或 `INSTALL.bat`）开始安装，详见 `README-安装说明.txt`。
+**本仓库只包含安装脚本与文档，不包含程序本体和数据，单独克隆/下载本仓库无法完成安装。**
+
+完整安装需要获取全量安装包，有两种形态：
+
+1. **一键安装器（推荐）**：`Fairy-Setup-v1.0.exe` + `Fairy-Setup-v1.0-1.bin`（约 13GB），两个文件放同一文件夹后双击 exe，按组件勾选安装（桌宠 / GPT-SoVITS 语音 / SnowLuma / QQ 桥接）。
+2. **散装整合包**：`Fairy-Installer-v1.0.zip`（解压后含 `payload/` 目录）+ `Fairy-Data-v1.0.zip`（语音数据），全部解压/放置到同一目录后，双击 `安装 Fairy.bat`。
+
+全量包下载地址：*（网盘 / Release 链接待补充）*
+
+> 仅当 `安装 Fairy.bat` 与 `payload/` 目录、`Fairy-Data-*.zip` 数据包在同一目录时才能运行；否则会提示"安装包不完整"。
