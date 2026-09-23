@@ -11,6 +11,8 @@
     -Target D:\Fairy      指定安装目录（默认 D:\Fairy；若该盘不存在则用 C:\Fairy）
     -DataZip <路径>       指定数据包 zip（默认自动在同目录找 Fairy-Data-*.zip）
     -SkipData             跳过数据包解压（只装程序，GPT-SoVITS 稍后再补）
+    -SkipCopy             程序文件已铺好（如由 Inno Setup 安装器直接写入），
+                          跳过 payload 检查与 robocopy 复制，只做路径重写等收尾
     -Force                目标目录非空时不再询问，直接覆盖
     -NoShortcut           不创建桌面快捷方式
 #>
@@ -20,6 +22,7 @@ param(
     [string]$Target = "",
     [string]$DataZip = "",
     [switch]$SkipData,
+    [switch]$SkipCopy,
     [switch]$Force,
     [switch]$NoShortcut
 )
@@ -59,7 +62,8 @@ Say ("  来源: {0}" -f $SrcRoot)
 Say ("  日志: {0}" -f $LogFile)
 Log "install start, SrcRoot=$SrcRoot"
 
-if (-not (Test-Path -LiteralPath $PayloadDir)) { Die "安装包不完整：找不到 payload 目录 ($PayloadDir)" }
+if (-not $SkipCopy -and -not (Test-Path -LiteralPath $PayloadDir)) { Die "安装包不完整：找不到 payload 目录 ($PayloadDir)" }
+if ($SkipCopy -and -not $Target) { Die '-SkipCopy 需要同时用 -Target 指定安装目录' }
 
 # ---------------------------------------------------------------- 1. 目标目录
 Step 1 7 '确定安装目录'
@@ -140,6 +144,11 @@ if ($SkipData) {
     Ok ("数据包解压完成，用时 {0:N1} 分钟" -f $dt.TotalMinutes)
 }
 
+if ($SkipCopy) {
+    Step 4 7 '写入程序文件'
+    Say '      已由安装程序直接写入文件，跳过复制阶段'
+    Log 'skip payload copy (-SkipCopy)'
+} else {
 # ---------------------------------------------------------------- 4. 铺程序
 Step 4 7 '写入程序文件'
 
@@ -153,6 +162,7 @@ $dt = (Get-Date) - $t0
 if ($rc -ge 8) { Die "复制程序文件失败（robocopy 退出码 $rc）" }
 $n = (Get-ChildItem -LiteralPath $Target -Recurse -Force -File -ErrorAction SilentlyContinue | Measure-Object).Count
 Ok ("程序文件 {0:N0} 个，用时 {1:N1} 秒" -f $n, $dt.TotalSeconds)
+}
 
 # ---------------------------------------------------------------- 5. 路径重写
 Step 5 7 '重写写死的绝对路径'
