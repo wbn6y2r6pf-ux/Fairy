@@ -1,0 +1,4 @@
+# 大文件（超过 GitHub 100MB 限制，不进仓库）
+*.zip
+apps/
+payload/

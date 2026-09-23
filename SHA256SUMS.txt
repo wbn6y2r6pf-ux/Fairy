@@ -1,0 +1,2 @@
+96eb8341c17578fb3681dad33744c821a2956fcd0532ada5e9eacf5bfe5aa3dd  Fairy-Installer-v1.0.zip
+f83e9bb0d53643cb4adedff6b509c4d412558891b41ce491c6cfc8f72c9ec10a  Fairy-Data-v1.0.zip
